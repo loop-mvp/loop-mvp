@@ -485,7 +485,6 @@ function AlignmentScorecard({ sections }) {
 
 function InternalAlignmentSection({ id, icon, label, contentPreview, sectionData, onChange }) {
   const [expanded, setExpanded] = useState(false);
-  const updateComments = (newComments) => onChange({ ...sectionData, comments: newComments });
   const handleCommentAdd = (comment, isUpdate) => {
     if (isUpdate) {
       onChange({ ...sectionData, comments: sectionData.comments.map(c => c.id === comment.id ? comment : c) });
@@ -579,7 +578,6 @@ function GTMAssetsSection({ assets, onChange }) {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "12px" }}>
         {DEFAULT_ASSETS.map(({ key, label, icon }) => {
           const data = assets[key] || { status: "wip", comments: [] };
-          const sc = STATUS_CONFIG[data.status];
           const unresolved = data.comments?.filter(c => !c.resolved).length || 0;
           return (
             <AssetCard key={key} icon={icon} label={label} data={data}
